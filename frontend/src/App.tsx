@@ -4,7 +4,6 @@ import RealTimeTranscription from './components/RealTimeTranscription';
 import './index.css';
 
 function App() {
-  const [isRecording, setIsRecording] = useState(false);
   const [sensitivity, setSensitivity] = useState(1);
 
   const handleSaveTranscript = (text: string) => {
@@ -28,9 +27,9 @@ function App() {
               </div>
             </div>
             <div className="flex items-center gap-2 bg-slate-800 px-4 py-2 rounded-lg">
-              <span className={`w-3 h-3 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-slate-600'}`}></span>
+              <span className={`w-3 h-3 rounded-full bg-slate-600`}></span>
               <span className="text-white text-sm font-medium">
-                {isRecording ? 'Recording' : 'Idle'}
+                Ready
               </span>
             </div>
           </div>
@@ -58,7 +57,7 @@ function App() {
           {/* Right Column - Transcription */}
           <div>
             <RealTimeTranscription 
-              isRecording={isRecording}
+              isRecording={false}
               onSaveTranscript={handleSaveTranscript}
             />
 
