@@ -4,11 +4,13 @@ import { useAudioAnalyzer } from '../hooks/useAudioAnalyzer';
 interface CircularEqualizerProps {
   sensitivity?: number;
   onSensitivityChange?: (value: number) => void;
+  onRecordingChange?: (isRecording: boolean) => void;
 }
 
 export default function CircularEqualizer({ 
   sensitivity = 1, 
-  onSensitivityChange 
+  onSensitivityChange,
+  onRecordingChange
 }: CircularEqualizerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { isRecording, error, startRecording, stopRecording, getFrequencyData } = useAudioAnalyzer();
@@ -121,8 +123,10 @@ export default function CircularEqualizer({
   const handleToggleMic = async () => {
     if (isRecording) {
       stopRecording();
+      onRecordingChange?.(false);
     } else {
       await startRecording();
+      onRecordingChange?.(true);
     }
   };
 

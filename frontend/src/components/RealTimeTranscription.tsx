@@ -100,8 +100,20 @@ export default function RealTimeTranscription({
         
         streamRef.current = stream;
 
+        // Detect supported mime type
+        let mimeType = 'audio/webm';
+        if (MediaRecorder.isTypeSupported('audio/webm')) {
+          mimeType = 'audio/webm';
+        } else if (MediaRecorder.isTypeSupported('audio/mp4')) {
+          mimeType = 'audio/mp4';
+        } else if (MediaRecorder.isTypeSupported('audio/ogg')) {
+          mimeType = 'audio/ogg';
+        } else if (MediaRecorder.isTypeSupported('audio/wav')) {
+          mimeType = 'audio/wav';
+        }
+
         const mediaRecorder = new MediaRecorder(stream, {
-          mimeType: 'audio/webm',
+          mimeType,
         });
         
         mediaRecorderRef.current = mediaRecorder;

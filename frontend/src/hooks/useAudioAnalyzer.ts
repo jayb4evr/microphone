@@ -92,8 +92,8 @@ export function useAudioAnalyzer() {
 
   const getFrequencyData = useCallback((): Uint8Array | null => {
     if (analyserRef.current && dataArrayRef.current) {
-      // @ts-ignore - TypeScript has issues with Uint8Array ArrayBufferLike
-      analyserRef.current.getByteFrequencyData(dataArrayRef.current);
+      // Type assertion needed due to TypeScript DOM lib type mismatch
+      analyserRef.current.getByteFrequencyData(dataArrayRef.current as any);
       return dataArrayRef.current;
     }
     return null;
@@ -101,8 +101,8 @@ export function useAudioAnalyzer() {
 
   const getTimeDomainData = useCallback((): Uint8Array | null => {
     if (analyserRef.current && dataArrayRef.current) {
-      // @ts-ignore - TypeScript has issues with Uint8Array ArrayBufferLike
-      analyserRef.current.getByteTimeDomainData(dataArrayRef.current);
+      // Type assertion needed due to TypeScript DOM lib type mismatch
+      analyserRef.current.getByteTimeDomainData(dataArrayRef.current as any);
       return dataArrayRef.current;
     }
     return null;

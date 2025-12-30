@@ -5,10 +5,15 @@ import './index.css';
 
 function App() {
   const [sensitivity, setSensitivity] = useState(1);
+  const [isRecording, setIsRecording] = useState(false);
 
   const handleSaveTranscript = (text: string) => {
     console.log('Transcript saved:', text);
     // You can add additional logic here, such as showing a notification
+  };
+
+  const handleRecordingChange = (recording: boolean) => {
+    setIsRecording(recording);
   };
 
   return (
@@ -27,9 +32,9 @@ function App() {
               </div>
             </div>
             <div className="flex items-center gap-2 bg-slate-800 px-4 py-2 rounded-lg">
-              <span className={`w-3 h-3 rounded-full bg-slate-600`}></span>
+              <span className={`w-3 h-3 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-slate-600'}`}></span>
               <span className="text-white text-sm font-medium">
-                Ready
+                {isRecording ? 'Recording' : 'Ready'}
               </span>
             </div>
           </div>
@@ -49,15 +54,15 @@ function App() {
               sensitivity={sensitivity}
               onSensitivityChange={(value) => {
                 setSensitivity(value);
-                // You could sync this with recording state if needed
               }}
+              onRecordingChange={handleRecordingChange}
             />
           </div>
 
           {/* Right Column - Transcription */}
           <div>
             <RealTimeTranscription 
-              isRecording={false}
+              isRecording={isRecording}
               onSaveTranscript={handleSaveTranscript}
             />
 

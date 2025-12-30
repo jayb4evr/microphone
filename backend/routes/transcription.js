@@ -31,8 +31,10 @@ const transcriptionSchema = new mongoose.Schema({
   },
 });
 
-// Create index for efficient querying
+// Create indexes for efficient querying
 transcriptionSchema.index({ createdAt: -1 });
+transcriptionSchema.index({ language: 1, createdAt: -1 });
+transcriptionSchema.index({ confidence: -1 });
 
 const Transcription = mongoose.model('Transcription', transcriptionSchema);
 
