@@ -1,0 +1,32 @@
+{
+  "name": "microphone-mern-stack",
+  "version": "1.0.0",
+  "description": "Real-time audio equalizer with transcription using MERN stack",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "install:all": "npm install && npm install --prefix frontend && npm install --prefix backend",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev:backend": "npm run dev --prefix backend",
+    "build:frontend": "npm run build --prefix frontend",
+    "start:backend": "npm start --prefix backend"
+  },
+  "keywords": [
+    "audio",
+    "equalizer",
+    "transcription",
+    "mern",
+    "socket.io",
+    "react",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
